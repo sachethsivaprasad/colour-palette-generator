@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Colour Palette Generator</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Helvetica, Arial, sans-serif; margin: 0; background: #f7fafc; color: #1a202c; }
+    header, main, form { width: 90%; max-width: 860px; margin: 0 auto; }
+    header { padding: 2rem 1rem 1rem; }
+    header h1 { font-size: 2rem; margin: 0 0 .5rem; }
+    header p { color: #4a5568; margin: 0; }
+    form { background: #e6fffa; border: 1px solid #b2f5ea; padding: 1rem; border-radius: 8px; }
+    .row { margin: .75rem 0; }
+    input[type="file"], input[type="number"], button { font-size: 1rem; }
+    input[type="number"] { width: 6rem; padding: .4rem .5rem; border-radius: 6px; border: 1px solid #cbd5e0; }
+    input[type="file"] { padding: .2rem; }
+    button { background: #2c7a7b; color: #fff; border: 2px solid #285e61; border-radius: 6px; padding: .5rem .9rem; cursor: pointer; }
+    button:hover { background: #285e61; }
+    .error { color: #c53030; margin-top: .5rem; }
+    footer { text-align: center; color: #718096; padding: 2rem 1rem; }
+  </style>
+  <!-- Reference: GeeksforGeeks tutorial used for general approach to file upload and palette concept -->
+  <!-- https://www.geeksforgeeks.org/image-colour-palette-generator-flask/ -->
+  
+</head>
+<body>
+  <header>
+    <h1>Image Colour Palette Generator</h1>
+    <p>Upload an image to see its top colours. You can choose how many colours to extract.</p>
+  </header>
+  <main>
+    <form action="/" method="POST" enctype="multipart/form-data">
+      <div class="row">
+        <label for="file">Image file</label><br />
+        <input id="file" type="file" name="file" accept="image/*" required />
+      </div>
+      <div class="row">
+        <label for="num_colors">Number of colours (3–20)</label><br />
+        <input id="num_colors" type="number" min="3" max="20" value="10" name="num_colors" />
+      </div>
+      <div class="row">
+        <button type="submit">Generate Palette</button>
+      </div>
+      {% if error %}
+      <div class="error">{{ error }}</div>
+      {% endif %}
+    </form>
+  </main>
+  <footer>
+    <small>Built with Flask and Pillow.</small>
+  </footer>
+</body>
+</html>
+

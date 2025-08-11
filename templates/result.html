@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palette Result</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: Helvetica, Arial, sans-serif; margin: 0; background: #f7fafc; color: #1a202c; }
+    header, main { width: 90%; max-width: 960px; margin: 0 auto; }
+    header { padding: 2rem 1rem 1rem; }
+    header h1 { font-size: 1.8rem; margin: 0 0 .5rem; }
+    header p { color: #4a5568; margin: 0; }
+    .palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; padding: 1rem; }
+    .swatch { border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden; background: #fff; }
+    .color { height: 80px; }
+    .meta { padding: .6rem .7rem; font-size: .95rem; }
+    .meta code { background: #edf2f7; padding: .15rem .35rem; border-radius: 4px; }
+    .back { margin: 0 1rem 1rem; display: inline-block; }
+    .back a { color: #2c7a7b; text-decoration: none; font-weight: 600; }
+    .back a:hover { text-decoration: underline; }
+  </style>
+  <!-- Reference: GeeksforGeeks tutorial used for general approach to file upload and palette concept -->
+  <!-- https://www.geeksforgeeks.org/image-colour-palette-generator-flask/ -->
+</head>
+<body>
+  <header>
+    <h1>Top {{ num_colors }} Colours</h1>
+    <p>Calculated using an adaptive palette and pixel frequency.</p>
+  </header>
+  <div class="back"><a href="/">← Generate another palette</a></div>
+  <main>
+    <section class="palette">
+      {% for c in colors %}
+      <div class="swatch">
+        <div class="color" style="background: {{ c.hex }}"></div>
+        <div class="meta">
+          <div><strong>{{ c.hex }}</strong></div>
+          <div>RGB <code>{{ c.rgb[0] }}, {{ c.rgb[1] }}, {{ c.rgb[2] }}</code></div>
+          <div>{{ c.percent }}% ({{ c.count }} px)</div>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>
+
