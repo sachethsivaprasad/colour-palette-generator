@@ -8,7 +8,6 @@ def rgb_to_hex(rgb_tuple):
     return "#%02x%02x%02x" % (rgb_tuple[0], rgb_tuple[1], rgb_tuple[2])
 
 def extract_top_colors(image_file, num_colors=10):
-    """Return a list of top colors with rgb, hex, count, and percent using NumPy."""
     with Image.open(image_file) as image:
         image = image.convert("RGB")
         image.thumbnail((400, 400))
